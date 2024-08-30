@@ -4,13 +4,13 @@
 -- Ex.: > trocar 162
 -- [1, 1, 10, 50, 100]
 
+-- Função principal que calcula as cédulas necessárias
 trocar :: Int -> [Int]
-trocar valor = cedulas valor
+trocar valor = cedulas valor [100, 50, 10, 5, 1]
 
-cedulas :: Int -> [Int]
-cedulas n = [maximo n [100,50,10,5,1]] ++ [ i = n | i > 0, n = n -(maximo n [100,50,10,5,1])]
-
-maximo :: Int -> [Int] -> Int 
-maximo max (h:t)
-  | max > h = h   
-  | otherwise = maximo max t
+-- Função auxiliar que calcula as cédulas necessárias
+cedulas :: Int -> [Int] -> [Int]
+cedulas 0 _ = []
+cedulas valor (h:t)
+  | valor >= h = cedulas (valor - h) (h:t) ++ [h]
+  | otherwise  = cedulas valor t
