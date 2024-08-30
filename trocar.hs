@@ -7,16 +7,10 @@
 trocar :: Int -> [Int]
 trocar valor = cedulas valor
 
-cedulas :: Int -> Int -> [Int]
+cedulas :: Int -> [Int]
+cedulas n = [maximo n [100,50,10,5,1]] ++ [ i = n | i > 0, n = n -(maximo n [100,50,10,5,1])]
 
-maximo :: Int -> [Int] -> Int
-maximo acc (h:t) 
-  | (h:t) = (acc + h) : max (acc + h) t 
-  |
-
-  -- Função auxiliar para calcular a soma dos elementos ímpares de uma lista
-somaImparesAux :: Int -> [Int] -> Int
-somaImparesAux acc [] = acc
-somaImparesAux acc (h:t)
-   | h `mod` 2 /= 0 = somaImparesAux (acc + h) t
-   | otherwise = somaImparesAux acc t
+maximo :: Int -> [Int] -> Int 
+maximo max (h:t)
+  | max > h = h   
+  | otherwise = maximo max t
